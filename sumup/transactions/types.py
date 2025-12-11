@@ -277,7 +277,9 @@ Format: int64
 
 EventType = typing.Literal["CHARGE_BACK", "PAYOUT", "PAYOUT_DEDUCTION", "REFUND"]
 
-EventStatus = typing.Literal["FAILED", "PAID_OUT", "PENDING", "REFUNDED", "SCHEDULED", "SUCCESSFUL"]
+EventStatus = typing.Literal[
+    "FAILED", "PAID_OUT", "PENDING", "REFUNDED", "SCHEDULED", "SUCCESSFUL"
+]
 
 AmountEvent = float
 """
@@ -708,8 +710,17 @@ class TransactionFull(pydantic.BaseModel):
 	Verification method used for the transaction.
 	"""
 
+    @pydantic.model_validator(mode="before")
+    @classmethod
+    def normalize_none_strings(cls, data: typing.Any):
+        if isinstance(data, dict):
+            return {k: (None if v == "none" else v) for k, v in data.items()}
+        return data
 
-TransactionHistoryStatus = typing.Literal["CANCELLED", "FAILED", "PENDING", "SUCCESSFUL"]
+
+TransactionHistoryStatus = typing.Literal[
+    "CANCELLED", "FAILED", "PENDING", "SUCCESSFUL"
+]
 
 TransactionHistoryPaymentType = typing.Literal["BOLETO", "ECOM", "POS", "RECURRING"]
 
