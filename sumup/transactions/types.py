@@ -90,7 +90,9 @@ class TransactionBase(pydantic.BaseModel):
 	"""
 
 
-TransactionCheckoutInfoEntryMode = typing.Literal["BOLETO", "CUSTOMER_ENTRY"]
+TransactionCheckoutInfoEntryMode = typing.Union[
+    typing.Literal["BOLETO", "CUSTOMER_ENTRY"], str
+]
 
 
 class TransactionCheckoutInfo(pydantic.BaseModel):
@@ -469,7 +471,7 @@ TransactionFullStatus = typing.Literal["CANCELLED", "FAILED", "PENDING", "SUCCES
 
 TransactionFullPaymentType = typing.Literal["BOLETO", "ECOM", "POS", "RECURRING"]
 
-TransactionFullEntryMode = typing.Literal["BOLETO", "CUSTOMER_ENTRY"]
+TransactionFullEntryMode = typing.Union[typing.Literal["BOLETO", "CUSTOMER_ENTRY"]]
 
 TransactionFullPayoutPlan = typing.Literal[
     "ACCELERATED_INSTALLMENT", "SINGLE_PAYMENT", "TRUE_INSTALLMENT"
