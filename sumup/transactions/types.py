@@ -189,22 +189,25 @@ HorizontalAccuracy = float
 Indication of the precision of the geographical position received from the payment terminal.
 """
 
-CardResponseType = typing.Literal[
-    "AMEX",
-    "CUP",
-    "DINERS",
-    "DISCOVER",
-    "ELO",
-    "ELV",
-    "HIPERCARD",
-    "JCB",
-    "MAESTRO",
-    "MASTERCARD",
-    "UNKNOWN",
-    "VISA",
-    "VISA_ELECTRON",
-    "VISA_VPAY",
-]
+CardResponseType = (
+    typing.Literal[
+        "AMEX",
+        "CUP",
+        "DINERS",
+        "DISCOVER",
+        "ELO",
+        "ELV",
+        "HIPERCARD",
+        "JCB",
+        "MAESTRO",
+        "MASTERCARD",
+        "UNKNOWN",
+        "VISA",
+        "VISA_ELECTRON",
+        "VISA_VPAY",
+    ]
+    | str
+)
 
 
 class CardResponse(pydantic.BaseModel):
@@ -323,7 +326,7 @@ class TransactionEvent(pydantic.BaseModel):
 	Format: date
 	"""
 
-    event_type: typing.Optional[EventType] = None
+    event_type: typing.Optional[EventType | str] = None
     """
 	Type of the transaction event.
 	"""
@@ -339,7 +342,7 @@ class TransactionEvent(pydantic.BaseModel):
 	Consecutive number of the installment that is paid. Applicable only payout events, i.e. `event_type = PAYOUT`.
 	"""
 
-    status: typing.Optional[EventStatus] = None
+    status: typing.Optional[EventStatus | str] = None
     """
 	Status of the transaction event.
 	"""
@@ -446,7 +449,7 @@ class Event(pydantic.BaseModel):
 	Consecutive number of the installment.
 	"""
 
-    status: typing.Optional[EventStatus] = None
+    status: typing.Optional[EventStatus | str] = None
     """
 	Status of the transaction event.
 	"""
@@ -461,7 +464,7 @@ class Event(pydantic.BaseModel):
 	Unique ID of the transaction.
 	"""
 
-    type: typing.Optional[EventType] = None
+    type: typing.Optional[EventType | str] = None
     """
 	Type of the transaction event.
 	"""
@@ -551,12 +554,12 @@ class TransactionFull(pydantic.BaseModel):
 	Details of the payment card.
 	"""
 
-    currency: typing.Optional[Currency] = None
+    currency: typing.Optional[Currency | str] = None
     """
 	Three-letter [ISO4217](https://en.wikipedia.org/wiki/ISO_4217) code of the currency for the amount. Currently supportedcurrency values are enumerated above.
 	"""
 
-    entry_mode: typing.Optional[TransactionFullEntryMode] = None
+    entry_mode: typing.Optional[TransactionFullEntryMode | str] = None
     """
 	Entry mode of the payment details.
 	"""
@@ -624,17 +627,17 @@ class TransactionFull(pydantic.BaseModel):
 	Unique code of the registered merchant to whom the payment is made.
 	"""
 
-    payment_type: typing.Optional[TransactionFullPaymentType] = None
+    payment_type: typing.Optional[TransactionFullPaymentType | str] = None
     """
 	Payment type used for the transaction.
 	"""
 
-    payout_plan: typing.Optional[TransactionFullPayoutPlan] = None
+    payout_plan: typing.Optional[TransactionFullPayoutPlan | str] = None
     """
 	Payout plan of the registered user at the time when the transaction was made.
 	"""
 
-    payout_type: typing.Optional[TransactionFullPayoutType] = None
+    payout_type: typing.Optional[TransactionFullPayoutType | str] = None
     """
 	Payout type for the transaction.
 	"""
@@ -659,17 +662,17 @@ class TransactionFull(pydantic.BaseModel):
 	List of products from the merchant's catalogue for which the transaction serves as a payment.
 	"""
 
-    simple_payment_type: typing.Optional[TransactionFullSimplePaymentType] = None
+    simple_payment_type: typing.Optional[TransactionFullSimplePaymentType | str] = None
     """
 	Simple name of the payment type.
 	"""
 
-    simple_status: typing.Optional[TransactionFullSimpleStatus] = None
+    simple_status: typing.Optional[TransactionFullSimpleStatus | str] = None
     """
 	Status generated from the processing status and the latest transaction state.
 	"""
 
-    status: typing.Optional[TransactionFullStatus] = None
+    status: typing.Optional[TransactionFullStatus | str] = None
     """
 	Current status of the transaction.
 	"""
@@ -715,7 +718,7 @@ class TransactionFull(pydantic.BaseModel):
 	List of VAT rates applicable to the transaction.
 	"""
 
-    verification_method: typing.Optional[TransactionFullVerificationMethod] = None
+    verification_method: typing.Optional[TransactionFullVerificationMethod | str] = None
     """
 	Verification method used for the transaction.
 	"""
