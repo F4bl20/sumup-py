@@ -471,7 +471,7 @@ TransactionFullStatus = typing.Literal["CANCELLED", "FAILED", "PENDING", "SUCCES
 
 TransactionFullPaymentType = typing.Literal["BOLETO", "ECOM", "POS", "RECURRING"]
 
-TransactionFullEntryMode = typing.Union[typing.Literal["BOLETO", "CUSTOMER_ENTRY"]]
+TransactionFullEntryMode = typing.Union[typing.Literal["BOLETO", "CUSTOMER_ENTRY"], str]
 
 TransactionFullPayoutPlan = typing.Literal[
     "ACCELERATED_INSTALLMENT", "SINGLE_PAYMENT", "TRUE_INSTALLMENT"
