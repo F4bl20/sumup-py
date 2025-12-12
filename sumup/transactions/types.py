@@ -488,6 +488,7 @@ TransactionFullVerificationMethod = typing.Literal[
     "offline pin + signature",
     "online pin",
     "signature",
+    "na",
 ]
 
 TransactionFullPayoutType = typing.Literal["BALANCE", "BANK_ACCOUNT", "PREPAID_CARD"]
