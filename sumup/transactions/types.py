@@ -90,9 +90,7 @@ class TransactionBase(pydantic.BaseModel):
 	"""
 
 
-TransactionCheckoutInfoEntryMode = typing.Union[
-    typing.Literal["BOLETO", "CUSTOMER_ENTRY"], str
-]
+TransactionCheckoutInfoEntryMode = typing.Literal["BOLETO", "CUSTOMER_ENTRY"]
 
 
 class TransactionCheckoutInfo(pydantic.BaseModel):
@@ -130,6 +128,13 @@ class TransactionCheckoutInfo(pydantic.BaseModel):
     """
 	Amount of the applicable VAT (out of the total transaction amount).
 	"""
+
+    @pydantic.model_validator(mode="before")
+    @classmethod
+    def normalize_none_strings(cls, data: typing.Any):
+        if isinstance(data, dict):
+            return {k: (None if v == "none" else v) for k, v in data.items()}
+        return data
 
 
 TransactionMixinHistoryPayoutPlan = typing.Literal[
