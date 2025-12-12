@@ -90,7 +90,9 @@ class TransactionBase(pydantic.BaseModel):
 	"""
 
 
-TransactionCheckoutInfoEntryMode = typing.Literal["BOLETO", "CUSTOMER_ENTRY"]
+TransactionCheckoutInfoEntryMode = typing.Union[
+    typing.Literal["BOLETO", "CUSTOMER_ENTRY"], str
+]
 
 
 class TransactionCheckoutInfo(pydantic.BaseModel):
